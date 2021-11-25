@@ -1,0 +1,29 @@
+@import '../styles/colors.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $grey;
+  padding: 2rem;
+
+  .brand {
+    font-size: 2rem;
+    color: $almost-white;
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+  }
+
+  .item {
+    margin-left: 1.5rem;
+    font-size: 1.5rem;
+    color: $almost-white;
+
+    &:hover {
+      color: $dark-blue;
+    }
+  }
+}
