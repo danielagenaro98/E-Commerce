@@ -5,25 +5,31 @@
   align-items: center;
   justify-content: space-between;
   background-color: $grey;
-  padding: 2rem;
+  padding: 2rem 10%;
 
   .brand {
     font-size: 2rem;
     color: $almost-white;
   }
 
-  .list {
+  .nav-container {
     display: flex;
     align-items: center;
-  }
 
-  .item {
-    margin-left: 1.5rem;
-    font-size: 1.5rem;
-    color: $almost-white;
+    .list {
+      display: flex;
+      align-items: center;
+      margin-right: 5rem;
 
-    &:hover {
-      color: $dark-blue;
+      .item {
+        margin-left: 1.5rem;
+        font-size: 1.5rem;
+        color: $almost-white;
+
+        &:hover {
+          color: $dark-blue;
+        }
+      }
     }
   }
 }
