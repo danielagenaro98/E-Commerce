@@ -1,9 +1,11 @@
+import ItemCount from './ItemCount';
+
 import classes from './ItemListContainer.module.scss';
 
 const ItemListContainer = () => {
   return (
     <div className={classes.container}>
-      <h2>Este es mi Item List Container</h2>
+      <ItemCount limit={10} initial={0} onAdd="" />
     </div>
   );
 };

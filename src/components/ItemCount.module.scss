@@ -1,0 +1,37 @@
+@import '../styles/colors.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .label {
+    font-size: 2rem;
+    color: $dark-grey;
+    margin: 1rem;
+  }
+
+  .count-container {
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+
+    .count-btn {
+      padding: 0 1rem;
+      text-align: center;
+      border: 1px solid $dark-grey;
+      border-radius: 1px;
+      background-color: $white;
+      font-size: 2rem;
+      &:hover {
+        background-color: $dark-grey;
+        color: $almost-white;
+      }
+    }
+
+    .count-input {
+      border: none;
+      text-align: center;
+    }
+  }
+}
