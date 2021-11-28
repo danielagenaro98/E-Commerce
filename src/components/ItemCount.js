@@ -6,14 +6,16 @@ const ItemCount = ({ limit, initial }) => {
 
   return (
     <div className={classes.container}>
-      <label className={classes.label} htmlFor="count-btn">
-        Producto
-      </label>
       <div className={classes['count-container']}>
         <button className={classes['count-btn']} onClick={decrement}>
           -
         </button>
-        <input className={classes['count-input']} type="text" value={counter} />
+        <input
+          className={classes['count-input']}
+          type="text"
+          value={counter}
+          onChange={() => counter}
+        />
         <button className={classes['count-btn']} onClick={increment}>
           +
         </button>

@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
 import { getData } from '../helpers/getData';
-import ItemCount from './ItemCount';
-
-import classes from './ItemListContainer.module.scss';
+import ItemList from './ItemList';
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getData().then((resp) => {
-      setItems(resp);
-    });
+    setLoading(true);
+    getData()
+      .then((resp) => {
+        setItems(resp);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   return (
-    <div className={classes.container}>
-      <ItemCount limit={10} initial={0} />
-    </div>
+    <>{loading ? <h2>Cargando productos..</h2> : <ItemList items={items} />}</>
   );
 };
 
