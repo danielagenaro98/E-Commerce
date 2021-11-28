@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
-const useCounter = (initial = 0) => {
+const useCounter = (initial = 0, limit) => {
   const [counter, setCounter] = useState(initial);
 
   const increment = () => {
-    setCounter(counter + 1);
+    if (counter < limit) setCounter(counter + 1);
   };
 
   const decrement = () => {
-    setCounter(counter - 1);
+    if (counter > 0) setCounter(counter - 1);
   };
 
   return {
