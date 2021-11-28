@@ -1,16 +1,10 @@
 import { useState } from 'react';
 
 import classes from './ItemCount.module.scss';
+import useCounter from './useCounter';
 
-const ItemCount = ({ limit, initial, onAdd }) => {
-  const [count, setCount] = useState(initial);
-
-  const handleChangeValue = (value) => {
-    let new_value = Number(count) + Number(value);
-    if (new_value >= 0 && new_value <= Number(limit)) {
-      setCount(new_value);
-    }
-  };
+const ItemCount = ({ limit, initial }) => {
+  const { counter, increment, decrement } = useCounter(initial);
 
   return (
     <div className={classes.container}>
@@ -20,18 +14,14 @@ const ItemCount = ({ limit, initial, onAdd }) => {
       <div className={classes['count-container']}>
         <button
           className={classes['count-btn']}
-          onClick={() => {
-            handleChangeValue(-1);
-          }}
+          onClick={counter > 0 && decrement}
         >
           -
         </button>
-        <input className={classes['count-input']} type="text" value={count} />
+        <input className={classes['count-input']} type="text" value={counter} />
         <button
           className={classes['count-btn']}
-          onClick={() => {
-            handleChangeValue(1);
-          }}
+          onClick={counter < limit && increment}
         >
           +
         </button>
