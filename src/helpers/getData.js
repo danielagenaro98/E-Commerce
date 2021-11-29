@@ -7,3 +7,11 @@ export const getData = () => {
     }, 2000);
   });
 };
+
+export const getItem = (id) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(stock.find((el) => el.id === id));
+    }, 2000);
+  });
+};

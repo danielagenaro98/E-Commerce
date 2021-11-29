@@ -1,6 +1,7 @@
+import ItemCount from './ItemCount';
 import classes from './Item.module.scss';
 
-const Item = ({ item }) => {
+const ItemDetail = ({ item }) => {
   return (
     <div className={classes.container}>
       <div className={classes.information}>
@@ -8,9 +9,12 @@ const Item = ({ item }) => {
         <p className={classes.size}>Cantidad: {item.cantidad}</p>
         <p className={classes.price}>Precio: ${item.precio}</p>
       </div>
-      <button>Ver mas</button>
+      <div>
+        <ItemCount limit={10} initial={0} />
+      </div>
+      <button>Agregar al carrito</button>
     </div>
   );
 };
 
-export default Item;
+export default ItemDetail;
