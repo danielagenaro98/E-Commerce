@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import classes from './Item.module.scss';
 
 const Item = ({ item }) => {
@@ -8,7 +9,7 @@ const Item = ({ item }) => {
         <p className={classes.size}>Cantidad: {item.cantidad}</p>
         <p className={classes.price}>Precio: ${item.precio}</p>
       </div>
-      <button>Ver mas</button>
+      <Link to={`/detail/${item.id}`}>Ver mas</Link>
     </div>
   );
 };
