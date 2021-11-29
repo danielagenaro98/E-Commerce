@@ -1,32 +1,37 @@
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link } from 'react-router-dom';
 
 import classes from './Navbar.module.scss';
 
 const Navbar = (props) => {
   return (
     <header className={classes.container}>
-      <h2 className={classes.brand}>{props.brand}</h2>
+      <Link to="/">
+        <h2 className={classes.brand}>{props.brand}</h2>
+      </Link>
       <div className={classes['nav-container']}>
         <nav>
           <ul className={classes.list}>
             <li>
-              <a className={classes.item} href="/">
-                Productos
-              </a>
+              <Link className={classes.item} to="/category/frutosSecos">
+                Frutos Secos
+              </Link>
             </li>
             <li>
-              <a className={classes.item} href="/">
-                Nosotros
-              </a>
+              <Link className={classes.item} to="/category/mixes">
+                Mixes
+              </Link>
             </li>
             <li>
-              <a className={classes.item} href="/">
+              <Link className={classes.item} to="/">
                 Contacto
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
-        <ShoppingCartIcon sx={{ color: 'white', fontSize: 25 }} />
+        <Link className={classes.item} to="/cart">
+          <ShoppingCartIcon sx={{ color: 'white', fontSize: 25 }} />
+        </Link>
       </div>
     </header>
   );
