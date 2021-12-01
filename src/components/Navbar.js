@@ -1,5 +1,5 @@
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from 'react-router-dom';
+import { CartWidget } from './CartWidget';
 
 import classes from './Navbar.module.scss';
 
@@ -30,7 +30,7 @@ const Navbar = (props) => {
           </ul>
         </nav>
         <Link className={classes.item} to="/cart">
-          <ShoppingCartIcon sx={{ color: 'white', fontSize: 25 }} />
+          <CartWidget />
         </Link>
       </div>
     </header>

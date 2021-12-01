@@ -2,8 +2,13 @@ import ItemCount from './ItemCount';
 import classes from './Item.module.scss';
 import { useNavigate } from 'react-router';
 import useCounter from './useCounter';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
+import { Link } from 'react-router-dom';
 
 const ItemDetail = ({ item }) => {
+  const { addCart, isInCart } = useContext(CartContext);
+
   const { counter, increment, decrement } = useCounter(0, 10);
 
   const navigate = useNavigate();
@@ -13,12 +18,13 @@ const ItemDetail = ({ item }) => {
   };
 
   const handleAddCart = () => {
-    console.log('Item agregado', {
-      id: item.id,
-      precio: item.price,
-      nombre: item.name,
-      cantidad: counter,
-    });
+    counter > 0 &&
+      addCart({
+        id: item.id,
+        precio: item.precio,
+        nombre: item.nombre,
+        cantidad: counter,
+      });
   };
 
   return (
@@ -28,15 +34,22 @@ const ItemDetail = ({ item }) => {
         <p className={classes.size}>Cantidad: {item.cantidad}</p>
         <p className={classes.price}>Precio: ${item.precio}</p>
       </div>
-      <div>
-        <ItemCount
-          increment={increment}
-          decrement={decrement}
-          handleAddCart={handleAddCart}
-          counter={counter}
-        />
-      </div>
+      {!isInCart(item.id) ? (
+        <div>
+          <ItemCount
+            increment={increment}
+            decrement={decrement}
+            handleAddCart={handleAddCart}
+            counter={counter}
+          />
+        </div>
+      ) : (
+        <Link to="/cart">Terminar mi compra</Link>
+      )}
+
       <br />
+      <br />
+
       <button onClick={handleback}>Volver</button>
     </div>
   );
