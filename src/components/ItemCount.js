@@ -1,9 +1,6 @@
 import classes from './ItemCount.module.scss';
-import useCounter from './useCounter';
 
-const ItemCount = ({ limit, initial }) => {
-  const { counter, increment, decrement } = useCounter(initial, limit);
-
+const ItemCount = ({ counter, increment, decrement, handleAddCart }) => {
   return (
     <div className={classes.container}>
       <div className={classes['count-container']}>
@@ -20,6 +17,8 @@ const ItemCount = ({ limit, initial }) => {
           +
         </button>
       </div>
+      <br />
+      <button onClick={handleAddCart}>Agregar al carrito</button>
     </div>
   );
 };
