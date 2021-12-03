@@ -23,7 +23,6 @@ export const CartProvider = ({ children }) => {
   };
 
   const cartTotal = () => {
-    console.log(cart);
     return cart.reduce((total, el) => total + el.precio * el.cantidad, 0);
   };
 

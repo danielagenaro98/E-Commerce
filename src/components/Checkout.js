@@ -1,10 +1,14 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CartContext } from '../context/CartContext';
+import { Timestamp, collection, addDoc } from 'firebase/firestore/lite';
+import { db } from '../firebase/config';
+import { Link } from 'react-router-dom';
 
 export const Checkout = () => {
-  const { cart } = useContext(CartContext);
+  const [orderId, setOrderId] = useState(null);
+  const { cart, cartTotal, cleanCart } = useContext(CartContext);
 
-  const getOrder = () => {
+  const submitOrder = () => {
     const order = {
       buyer: {
         name: 'Daniela genaro',
@@ -12,15 +16,36 @@ export const Checkout = () => {
         tel: 15589290,
       },
       items: cart,
+      total: cartTotal(),
+      date: Timestamp.fromDate(new Date()),
     };
 
-    console.log(order);
+    const ordersRef = collection(db, 'ordenes');
+
+    addDoc(ordersRef, order).then((res) => {
+      setOrderId(res.id);
+      cleanCart();
+    });
   };
   return (
     <div>
-      <h2>Resumen de compra</h2>
-      <hr />
-      <button onClick={getOrder}>Finalizar compra</button>
+      {orderId ? (
+        <div>
+          <h2>¡Gracias por su compra!</h2>
+          <br />
+          <br />
+          <p>Su numero de compra es: {orderId}</p>
+          <br />
+          <hr />
+          <Link to="/">Volver al inicio</Link>
+        </div>
+      ) : (
+        <div>
+          <h2>Resumen de compra</h2>
+          <hr />
+          <button onClick={submitOrder}>Finalizar compra</button>
+        </div>
+      )}
     </div>
   );
 };
