@@ -44,7 +44,7 @@ const CartView = () => {
           <button onClick={cleanCart}>Vaciar Carrito</button>
           <br />
           <br />
-          <button>Terminar mi compra</button>
+          <Link to="/checkout">Terminar mi compra</Link>
         </>
       )}
     </div>
