@@ -3,18 +3,20 @@ import { CartContext } from '../context/CartContext';
 import { Timestamp, collection, addDoc } from 'firebase/firestore/lite';
 import { db } from '../firebase/config';
 import { Link } from 'react-router-dom';
+import classes from './Checkout.module.scss';
 
 export const Checkout = () => {
   const [orderId, setOrderId] = useState(null);
+  const [values, setValues] = useState({
+    nombre: '',
+    email: '',
+    tel: '',
+  });
   const { cart, cartTotal, cleanCart } = useContext(CartContext);
 
-  const submitOrder = () => {
+  const submitOrder = (buyer) => {
     const order = {
-      buyer: {
-        name: 'Daniela genaro',
-        email: 'dani@hotmail.com',
-        tel: 15589290,
-      },
+      buyer: buyer,
       items: cart,
       total: cartTotal(),
       date: Timestamp.fromDate(new Date()),
@@ -27,23 +29,65 @@ export const Checkout = () => {
       cleanCart();
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (values.nombre.length > 4 && values.email.length > 5) {
+      submitOrder(values);
+    } else {
+      alert('Campos inválidos');
+    }
+  };
+
+  const handleValues = (e) => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div>
       {orderId ? (
-        <div>
-          <h2>¡Gracias por su compra!</h2>
-          <br />
-          <br />
-          <p>Su numero de compra es: {orderId}</p>
-          <br />
-          <hr />
-          <Link to="/">Volver al inicio</Link>
+        <div className={classes.container}>
+          <h2 className={classes.title}>¡Gracias por su compra!</h2>
+          <p className={classes.content}>Su numero de compra es: {orderId}</p>
+          <Link to="/" className={classes.btn}>
+            Volver al inicio
+          </Link>
         </div>
       ) : (
-        <div>
-          <h2>Resumen de compra</h2>
-          <hr />
-          <button onClick={submitOrder}>Finalizar compra</button>
+        <div className={classes.container}>
+          <h2 className={classes.title}>Resumen de compra</h2>
+          <form onSubmit={handleSubmit} className={classes.container}>
+            <input
+              className={classes.content}
+              type="text"
+              placeholder="Nombre y apellido"
+              name="nombre"
+              value={values.nombre}
+              onChange={handleValues}
+            />
+            <input
+              className={classes.content}
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={values.email}
+              onChange={handleValues}
+            />
+            <input
+              className={classes.content}
+              type="tel"
+              placeholder="Telefono"
+              name="tel"
+              value={values.tel}
+              onChange={handleValues}
+            />
+            <button type="submit" className={classes.btn}>
+              Enviar
+            </button>
+          </form>
         </div>
       )}
     </div>

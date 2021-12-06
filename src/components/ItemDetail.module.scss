@@ -1,0 +1,4 @@
+@import '../styles/basics.scss';
+.btn {
+  @extend %btn;
+}

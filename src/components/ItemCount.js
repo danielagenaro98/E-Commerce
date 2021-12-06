@@ -18,7 +18,9 @@ const ItemCount = ({ counter, increment, decrement, handleAddCart }) => {
         </button>
       </div>
       <br />
-      <button onClick={handleAddCart}>Agregar al carrito</button>
+      <button className={classes.btn} onClick={handleAddCart}>
+        Agregar al carrito
+      </button>
     </div>
   );
 };

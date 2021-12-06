@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { db } from '../firebase/config';
 import ItemList from './ItemList';
 import { collection, getDocs, query, where } from 'firebase/firestore/lite';
+import classes from './Checkout.module.scss';
 
 const ItemListContainer = () => {
   const [items, setItems] = useState([]);
@@ -34,7 +35,13 @@ const ItemListContainer = () => {
   }, [id]);
 
   return (
-    <>{loading ? <h2>Cargando productos..</h2> : <ItemList items={items} />}</>
+    <div className={classes.container}>
+      {loading ? (
+        <h2 className={classes.title}>Cargando productos..</h2>
+      ) : (
+        <ItemList items={items} />
+      )}
+    </div>
   );
 };
 

@@ -44,13 +44,17 @@ const ItemDetail = ({ item }) => {
           />
         </div>
       ) : (
-        <Link to="/cart">Terminar mi compra</Link>
+        <Link to="/cart" className={classes.btn}>
+          Terminar mi compra
+        </Link>
       )}
 
       <br />
       <br />
 
-      <button onClick={handleback}>Volver</button>
+      <button className={classes.btn} onClick={handleback}>
+        Volver
+      </button>
     </div>
   );
 };

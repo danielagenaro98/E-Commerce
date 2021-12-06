@@ -22,11 +22,6 @@ const Navbar = (props) => {
                 Mixes
               </Link>
             </li>
-            <li>
-              <Link className={classes.item} to="/">
-                Contacto
-              </Link>
-            </li>
           </ul>
         </nav>
         <Link className={classes.item} to="/cart">
